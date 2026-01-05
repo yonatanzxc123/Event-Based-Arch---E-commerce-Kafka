@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 
 from consumer_app.api.order_api import router as order_router
-from consumer_app.services.rabbitmq_consumer import start_consumer_in_background
+from consumer_app.services.kafka_consumer import start_consumer_in_background
 
 app = FastAPI(title="Order Service (Consumer)")
 
 
 @app.on_event("startup")
 async def startup_event():
-    # Start RabbitMQ consumer in a background thread
+    # Start Kafka consumer in a background thread
     start_consumer_in_background()
 
 
