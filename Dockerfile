@@ -6,11 +6,11 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install dependencies
-RUN pip install --no-cache-dir fastapi "uvicorn[standard]" pika
+# Install dependencies (Updated to include kafka-python)
+RUN pip install --no-cache-dir fastapi "uvicorn[standard]" kafka-python
 
 # Copy project files into the container
 COPY . .
 
-# Default command (producer app); docker compose can override if needed
+# Default command
 CMD ["uvicorn", "producer_app.main:app", "--host", "0.0.0.0", "--port", "8000"]
