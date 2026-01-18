@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.4.0  # <--- Stable Zookeeper version
+    image: confluentinc/cp-zookeeper:7.4.0
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -12,7 +12,7 @@ services:
       - ecommerce-network
 
   kafka:
-    image: confluentinc/cp-kafka:7.4.0      # <--- Stable Kafka version (Didnt want to use KRaft for now )
+    image: confluentinc/cp-kafka:7.4.0
     depends_on:
       - zookeeper
     ports:
@@ -28,9 +28,8 @@ services:
       - ecommerce-network
 
   producer:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: noctrunal/ecommerce-producer
+    # Explicitly run the producer app
     command: ["uvicorn", "producer_app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     ports:
       - "8000:8000"
