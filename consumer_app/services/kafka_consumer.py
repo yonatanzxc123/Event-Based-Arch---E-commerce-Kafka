@@ -57,6 +57,7 @@ def start_consumer():
             print("Attempting to connect to Kafka...")
             consumer = KafkaConsumer(
                 TOPIC_NAME,
+
                 bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
                 auto_offset_reset='earliest',
                 value_deserializer=lambda x: json.loads(x.decode('utf-8'))
