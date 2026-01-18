@@ -74,7 +74,7 @@ def start_consumer():
             print(f"Consumer error: {e}")
             time.sleep(5)
 
-
+# start
 def start_consumer_in_background():
     t = threading.Thread(target=start_consumer, daemon=True)
     t.start()
